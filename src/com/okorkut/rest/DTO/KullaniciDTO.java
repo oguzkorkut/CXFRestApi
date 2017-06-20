@@ -1,4 +1,4 @@
-package com.okorkut.rest.resources;
+package com.okorkut.rest.DTO;
 
 import java.io.Serializable;
 

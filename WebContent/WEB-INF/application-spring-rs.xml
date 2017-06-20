@@ -20,29 +20,17 @@
 		</cxf:features>
 	</cxf:bus>
 
-	<bean id="mainResource" class="com.okorkut.rest.resources.MainResource">
-
-	</bean>
+	<bean id="mainResource" class="com.okorkut.rest.resources.MainResource"></bean>
+	<bean id="userResource" class="com.okorkut.rest.resources.UserResource"></bean>
+	
+	
 
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 
-	<!-- <jaxrs:server id="mainResource" address="/service">
-		<jaxrs:serviceBeans>
-			<ref bean="mainResource" />
-		</jaxrs:serviceBeans>
-
-		<jaxrs:providers>
-			<ref bean='jsonProvider' />
-		</jaxrs:providers>
-
-	</jaxrs:server> -->
-	
-	
-	
- 
     <jaxrs:server id="applicationCxfServer" address="/services">
         <jaxrs:serviceBeans>
             <ref bean="mainResource"/>
+            <ref bean="userResource"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json"/>
