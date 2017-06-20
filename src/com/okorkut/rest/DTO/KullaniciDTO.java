@@ -43,4 +43,14 @@ public class KullaniciDTO implements Serializable {
 		this.ePosta = ePosta;
 	}
 
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("id:" + id).append("\n").append("adi:" + adi).append("\n").append("soyadi" + soyadi).append("\n").append("ePosta:" + ePosta)
+				.append("\n");
+		return super.toString();
+	}
+
 }

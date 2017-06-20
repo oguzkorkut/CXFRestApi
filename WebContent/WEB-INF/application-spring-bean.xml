@@ -22,5 +22,12 @@
 		autowire="byName">
 	</bean> -->
 	
+	<bean id="userService" class="com.okorkut.rest.service.UserServiceImpl" autowire="byName">
+	</bean> 
+	
+	<bean id="serverStorageService" class="com.okorkut.rest.service.ServerStorageService" scope="singleton" autowire="byName">
+	</bean>
+	
+	
 
 </beans>

@@ -1,5 +1,7 @@
 package com.okorkut.rest.resources;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,12 +13,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.okorkut.rest.DTO.KullaniciDTO;
+import com.okorkut.rest.service.IUserService;
 
 @Path("/user/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
+
+	@Autowired
+	public IUserService userService;
 
 	public UserResource() {
 	}
@@ -25,40 +33,29 @@ public class UserResource {
 	@Path("/getKullaniciById")
 	public KullaniciDTO getKullaniciById(@QueryParam("id") int id) {
 
-		KullaniciDTO kullaniciDTO = new KullaniciDTO();
+		System.out.println("Sorgulanacak Kullanici Id:" + id);
 
-		kullaniciDTO.setId(1);
-		kullaniciDTO.setAdi("Oğuz");
-		kullaniciDTO.setSoyadi("Korkut");
-		kullaniciDTO.setePosta("oguz.korkut@32bit.com.tr");
+		KullaniciDTO kullaniciDTO = userService.getKullaniciById(id);
 
 		return kullaniciDTO;
 	}
 
 	@POST
 	@Path("/kaydet")
-	public KullaniciDTO kaydet(KullaniciDTO kullaniciDTO) {
+	public int kaydet(KullaniciDTO kullaniciDTO) {
 
-		KullaniciDTO dto = new KullaniciDTO();
+		int id = userService.kaydet(kullaniciDTO);
 
-		dto.setId(1);
-		dto.setAdi("Oğuz");
-		dto.setSoyadi("Korkut");
-		dto.setePosta("oguz.korkut@32bit.com.tr");
+		System.out.println("Kaydedilen Kullanici Id:" + id);
 
-		return dto;
+		return id;
 	}
 
 	@PUT
 	@Path("/guncelle")
 	public KullaniciDTO guncelle(KullaniciDTO kullaniciDTO) {
 
-		KullaniciDTO dto = new KullaniciDTO();
-
-		dto.setId(1);
-		dto.setAdi("Oğuz");
-		dto.setSoyadi("Korkut");
-		dto.setePosta("oguz.korkut@32bit.com.tr");
+		KullaniciDTO dto = userService.guncelle(kullaniciDTO);
 
 		return dto;
 	}
@@ -67,8 +64,20 @@ public class UserResource {
 	@Path("/sil/{id}")
 	public boolean guncelle(@PathParam("id") int id) {
 
-		return true;
+		System.out.println("Silinece Kullanici Id:" + id);
+
+		boolean control = userService.sil(id);
+
+		return control;
 	}
 
+	@GET
+	@Path("/getKullanicilar")
+	public List<KullaniciDTO> getKullanicilar() {
+
+		List<KullaniciDTO> dtos = userService.getKullanicilar();
+
+		return dtos;
+	}
 
 }
